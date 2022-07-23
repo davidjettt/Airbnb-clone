@@ -19,10 +19,10 @@ function App() {
           console.log(e);
         }
       })
-    console.log('here')
+    // console.log('here')
   }, [dispatch])
 
-  console.log('is loaded', isLoaded)
+  // console.log('is loaded', isLoaded)
   return (
     <>
       <Navigation isLoaded={isLoaded} />

@@ -1,0 +1,27 @@
+#dropdown-modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 35rem;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #dropdown-modal-background {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  #dropdown-modal-content {
+    position: absolute;
+    background-color:white;
+    border-radius: 9px;
+    width: 13rem;
+    height: 15rem;
+  }

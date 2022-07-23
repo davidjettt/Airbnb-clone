@@ -1,54 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from 'react-redux';
-import * as sessionActions from '../../store/session';
-import LoginFormModal from "../LoginFormModal";
-import LoginForm from "../LoginFormModal/LoginForm";
-import SignUpFormModal from "../SignupFormModal";
-import './Navigation.css'
+import React, { useState } from 'react';
+import { DropdownModal } from '../../context/DropdownModal';
+import Dropdown from './Dropdown';
+import './Dropdown.css';
 
+export default function IconDropdownModal() {
+    const [ showModal, setShowModal ] = useState(false);
 
-
-export default function ProfileButton({ user }) {
-    const dispatch = useDispatch();
-    const [showMenu, setShowMenu] = useState(false);
-    const sessionUser = useSelector(state => state.session.user);
-
-    console.log(showMenu)
-    let modalComp;
-
-    const openMenu = () => {
-        if (showMenu) return;
-        setShowMenu(true);
-            // console.log('TEST')
-            modalComp = (
-                <>
-                    <LoginFormModal />
-                    <SignUpFormModal />
-                </>
-            )
-
-    };
-
-    useEffect(() => {
-        console.log('TEST')
-        if (!showMenu) return;
-
-        const closeMenu = () => {
-        setShowMenu(false);
-        };
-
-        document.addEventListener('click', closeMenu);
-
-        return () => document.removeEventListener("click", closeMenu);
-    }, [showMenu]);
-
-    const logout = (e) => {
-        e.preventDefault();
-        dispatch(sessionActions.logout());
-    };
     return (
         <>
-            <button className="profile-button" onClick={openMenu}>
+            <button onClick={() => setShowModal(true)} className="profile-button">
                 <div className="sign-in-container">
 
                         {/* <i className="fa-solid fa-circle-user"></i> */}
@@ -61,21 +21,11 @@ export default function ProfileButton({ user }) {
                     </div>
                 </div>
             </button>
-            {/* {showMenu && <LoginFormModal />} */}
-        {showMenu && (
-            <ul className='profile-dropdown'>
-                {sessionUser ? <li>{user.email}</li> : null}
-                <li>
-                    <LoginFormModal />
-                </li>
-                <li>
-                    <SignUpFormModal />
-                </li>
-                <li>
-                {sessionUser ? <button onClick={logout}>Log Out</button> : null}
-                </li>
-            </ul>
-        )}
+            {showModal && (
+                <DropdownModal onClose={() => setShowModal(false)}>
+                    <Dropdown />
+                </DropdownModal>
+            )}
         </>
     )
 }

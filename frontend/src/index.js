@@ -5,6 +5,7 @@ import { Provider as ReduxProvider } from 'react-redux';
 import './index.css';
 import App from './App';
 import { ModalProvider } from './context/Modal';
+import { DropdownModalProvider } from './context/DropdownModal';
 
 import configureStore from './store';
 import { restoreCSRF, csrfFetch } from './store/csrf';
@@ -23,11 +24,13 @@ if (process.env.NODE_ENV !== "production") {
 function Root() {
   return (
     <ReduxProvider store={store}>
-      <ModalProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </ModalProvider>
+      <DropdownModalProvider>
+        <ModalProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </ModalProvider>
+      </DropdownModalProvider>
     </ReduxProvider>
   );
 }
